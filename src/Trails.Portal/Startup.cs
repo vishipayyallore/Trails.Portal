@@ -3,7 +3,6 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
-using Newtonsoft.Json.Serialization;
 using Trails.Portal.ViewModels;
 
 namespace Trails.Portal
@@ -31,10 +30,12 @@ namespace Trails.Portal
             services.AddMvc();
 
             // Add functionality to inject IOptions<T>
-            //services.AddOptions();
+            services.AddOptions();
 
             // Add our Config object so it can be injected
             services.Configure<ApplicationDetails>(Configuration.GetSection("ApplicationDetails"));
+
+            services.AddSingleton<IConfiguration>(Configuration);
 
             // Add framework services.
             //services.AddMvc().AddJsonOptions(options => {
