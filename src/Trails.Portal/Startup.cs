@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
+using Newtonsoft.Json.Serialization;
 using Trails.Portal.ViewModels;
 
 namespace Trails.Portal
@@ -38,10 +39,11 @@ namespace Trails.Portal
             services.AddSingleton<IConfiguration>(Configuration);
 
             // Add framework services.
-            //services.AddMvc().AddJsonOptions(options => {
-            //    options.SerializerSettings.ContractResolver =
-            //       new CamelCasePropertyNamesContractResolver();
-            //});
+            services.AddMvc().AddJsonOptions(options =>
+            {
+                options.SerializerSettings.ContractResolver =
+                   new CamelCasePropertyNamesContractResolver();
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
